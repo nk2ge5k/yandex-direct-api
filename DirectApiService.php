@@ -25,7 +25,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class DirectApiService
 {
     private $token;
-    private $login;
     private $clientLogin;
     private $apiUrl = 'https://api.direct.yandex.com/json/v5/';
 
@@ -83,11 +82,11 @@ class DirectApiService
      */
     private $adExtensionsService;
 
-    public function __construct($login, $token, $clientLogin)
+    public function __construct($token, $clientLogin)
     {
         AnnotationRegistry::registerLoader('class_exists');
+
         $this->token = $token;
-        $this->login = $login;
         $this->clientLogin = $clientLogin;
     }
 
