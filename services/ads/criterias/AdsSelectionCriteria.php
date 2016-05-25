@@ -72,4 +72,9 @@ class AdsSelectionCriteria extends Model
      * @var \directapi\common\enum\StatusEnum[]
      */
     public $AdImageModerationStatuses;
+
+    /**
+     * @var int[]
+     */
+    public $AdExtensionIds;
 }
