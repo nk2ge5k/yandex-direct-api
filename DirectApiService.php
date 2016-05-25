@@ -321,6 +321,7 @@ class DirectApiService
         $curl = $this->getCurl();
 
         $request = json_encode($request, JSON_UNESCAPED_UNICODE);
+        // TODO: придумать как обнулять свойства объектов
         $request = preg_replace('/,\s*"[^"]+":null|"[^"]+":null,?/', '', $request);
 
         curl_setopt_array(
