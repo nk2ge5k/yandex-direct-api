@@ -14,6 +14,7 @@ use directapi\services\changes\ChangesService;
 use directapi\services\keywords\KeywordsService;
 use directapi\services\sitelinks\SitelinksService;
 use directapi\services\vcards\VCardsService;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -81,6 +82,7 @@ class DirectApiService
 
     public function __construct($login, $token, $clientLogin)
     {
+        AnnotationRegistry::registerLoader('class_exists');
         $this->token = $token;
         $this->login = $login;
         $this->clientLogin = $clientLogin;
@@ -229,7 +231,9 @@ class DirectApiService
     private function getValidator() {
         if (!$this->validator) {
 
-            $this->validator = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();
+            $this->validator = Validation::createValidatorBuilder()
+                ->enableAnnotationMapping()
+                ->getValidator();
         }
         return $this->validator;
     }
