@@ -15,7 +15,10 @@ use directapi\services\keywords\KeywordsService;
 use directapi\services\sitelinks\SitelinksService;
 use directapi\services\vcards\VCardsService;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\Common\Cache\PhpFileCache;
 use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\Mapping\Cache\DoctrineCache;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -233,6 +236,7 @@ class DirectApiService
 
             $this->validator = Validation::createValidatorBuilder()
                 ->enableAnnotationMapping()
+                ->setMetadataCache(new DoctrineCache(new FilesystemCache(__DIR__ . '/cache')))
                 ->getValidator();
         }
         return $this->validator;
