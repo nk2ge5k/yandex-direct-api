@@ -18,6 +18,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\Common\Cache\PhpFileCache;
 use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\Mapping\Cache\CacheInterface;
 use Symfony\Component\Validator\Mapping\Cache\DoctrineCache;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -81,10 +82,18 @@ class DirectApiService
      * @var AdExtensionsService
      */
     private $adExtensionsService;
+    /**
+     * @var CacheInterface
+     */
+    protected $annotation_cache;
 
-    public function __construct($token, $clientLogin)
+    public function __construct(
+        $token, $clientLogin, CacheInterface $annotation_cache = null)
     {
         AnnotationRegistry::registerLoader('class_exists');
+
+        $this->annotation_cache = $annotation_cache !== null ?
+            $annotation_cache : new FilesystemCache(__DIR__ . '/cache');
 
         $this->token = $token;
         $this->clientLogin = $clientLogin;
@@ -235,7 +244,7 @@ class DirectApiService
 
             $this->validator = Validation::createValidatorBuilder()
                 ->enableAnnotationMapping()
-                ->setMetadataCache(new DoctrineCache(new FilesystemCache(__DIR__ . '/cache')))
+                ->setMetadataCache(new DoctrineCache($this->annotation_cache))
                 ->getValidator();
         }
         return $this->validator;
