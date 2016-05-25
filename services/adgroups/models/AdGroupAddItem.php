@@ -40,4 +40,10 @@ class AdGroupAddItem extends Model
      * @Assert\Valid()
      */
     public $MobileAppAdGroup;
+
+    /**
+     * @var DynamicTextAdGroupAdd
+     * @Assert\Valid()
+     */
+    public $DynamicTextAdGroup;
 }
