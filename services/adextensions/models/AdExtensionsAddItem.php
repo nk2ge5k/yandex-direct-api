@@ -10,6 +10,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class AdExtensionsAddItem extends Model implements ICallbackValidation
 {
     /**
+     * @Assert\Valid()
+     * @Assert\Type(type="directapi\services\adextensions\models\Callout")
+     * 
      * @var Callout
      */
     public $Callout;

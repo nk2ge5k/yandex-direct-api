@@ -16,6 +16,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class Callout extends Model implements ICallbackValidation
 {
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=25)
+     * 
      * @var string
      */
     public $CalloutText;
