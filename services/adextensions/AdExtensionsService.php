@@ -10,6 +10,7 @@ use directapi\services\BaseService;
 
 class AdExtensionsService extends BaseService
 {
+    const SERVICE = 'AdExtensions';
     /**
      * @param AdExtensionsAddItem[] $AdExtensions
      *
@@ -18,7 +19,7 @@ class AdExtensionsService extends BaseService
     public function add(array $AdExtensions)
     {
         $params = [
-            'AdExtensions' => $AdExtensions
+            self::SERVICE => $AdExtensions
         ];
         return parent::doAdd($params);
     }
@@ -53,11 +54,11 @@ class AdExtensionsService extends BaseService
             $params['CalloutFieldNames'] = $сalloutFieldNames;
         }
 
-        return parent::doGet($params, 'AdExtensions', null);
+        return parent::doGet($params, self::SERVICE, null);
     }
 
     protected function getName()
     {
-        return 'adextensions';
+        return strtolower(self::SERVICE);
     }
 }

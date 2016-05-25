@@ -7,16 +7,16 @@ use directapi\common\criterias\IdsCriteria;
 use directapi\common\criterias\LimitOffset;
 use directapi\common\results\ActionResult;
 use directapi\services\BaseService;
-//use directapi\services\keywords\criterias\KeywordsSelectionCriteria;
-//use directapi\services\keywords\criterias\KeywordsSelectionCriteria;
-//use directapi\services\keywords\criterias\KeywordsSelectionCriteria;
 use directapi\services\keywords\enum\KeywordFieldEnum;
 use directapi\services\keywords\models\KeywordAddItem;
 use directapi\services\keywords\models\KeywordGetItem;
 use directapi\services\keywords\models\KeywordUpdateItem;
+use \directapi\services\keywords\cirterias\KeywordsSelectionCriteria;
 
 class KeywordsService extends BaseService
 {
+    const SERVICE = 'Keywords';
+    
     /**
      * @param KeywordAddItem[] $Keywords
      *
@@ -25,7 +25,7 @@ class KeywordsService extends BaseService
     public function add(array $Keywords)
     {
         $params = [
-            'Keywords' => $Keywords
+            self::SERVICE => $Keywords
         ];
         return parent::doAdd($params);
     }
@@ -45,7 +45,7 @@ class KeywordsService extends BaseService
      *
      * @return KeywordGetItem[]
      */
-    public function get(\directapi\services\keywords\cirterias\KeywordsSelectionCriteria $SelectionCriteria, array $FieldNames, LimitOffset $Page = null)
+    public function get( KeywordsSelectionCriteria $SelectionCriteria, array $FieldNames, LimitOffset $Page = null)
     {
         $params = [
             'SelectionCriteria' => $SelectionCriteria,
@@ -55,7 +55,7 @@ class KeywordsService extends BaseService
             $params['Page'] = $Page;
         }
 
-        return parent::doGet($params, 'Keywords', false);
+        return parent::doGet($params, self::SERVICE, false);
     }
 
     /**
@@ -82,13 +82,13 @@ class KeywordsService extends BaseService
     public function update(array $Keywords)
     {
         $params = [
-            'Keywords' => $Keywords
+            self::SERVICE => $Keywords
         ];
         return parent::doUpdate($params);
     }
 
     protected function getName()
     {
-        return 'keywords';
+        return strtolower(self::SERVICE);
     }
 }

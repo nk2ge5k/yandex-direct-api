@@ -12,6 +12,7 @@ use directapi\services\BaseService;
 
 class AdsService extends BaseService
 {
+    const SERVICE = 'Ads';
     /**
      * @param AdAddItem[] $Ads
      *
@@ -20,7 +21,7 @@ class AdsService extends BaseService
     public function add(array $Ads)
     {
         $params = [
-            'Ads' => $Ads
+            self::SERVICE => $Ads
         ];
         return parent::doAdd($params);
     }
@@ -67,7 +68,7 @@ class AdsService extends BaseService
         if($DynamicTextAdFieldNames && is_array($DynamicTextAdFieldNames)){
             $params['DynamicTextAdFieldNames'] = $DynamicTextAdFieldNames;
         }
-        return parent::doGet($params, 'Ads', null);
+        return parent::doGet($params, self::SERVICE, null);
     }
 
     /**
@@ -118,13 +119,13 @@ class AdsService extends BaseService
     public function update(array $Ads)
     {
         $params = [
-            'Ads' => $Ads
+            self::SERVICE => $Ads
         ];
         return parent::doUpdate($params);
     }
 
     protected function getName()
     {
-        return 'ads';
+        return strtolower(self::SERVICE);
     }
 }

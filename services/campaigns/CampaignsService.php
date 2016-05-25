@@ -16,7 +16,7 @@ use directapi\services\campaigns\models\CampaignUpdateItem;
 
 class CampaignsService extends BaseService
 {
-    public static $name = 'Campaigns';
+    const SERVICE = 'Campaigns';
 
     /**
      * @param CampaignAddItem[] $Campaigns
@@ -26,7 +26,7 @@ class CampaignsService extends BaseService
     public function add(array $Campaigns)
     {
         $params = [
-            'Campaigns' => $Campaigns
+            self::SERVICE => $Campaigns
         ];
         return parent::doAdd($params);
     }
@@ -71,7 +71,7 @@ class CampaignsService extends BaseService
         if ($Page) {
             $params['Page'] = $Page;
         }
-        return parent::doGet($params, 'Campaigns', null);
+        return parent::doGet($params, self::SERVICE, null);
     }
 
     /**
@@ -106,13 +106,13 @@ class CampaignsService extends BaseService
     public function update($Campaigns)
     {
         $params = [
-            'Campaigns' => $Campaigns
+            self::SERVICE => $Campaigns
         ];
         return parent::doUpdate($params);
     }
 
     protected function getName()
     {
-        return 'campaigns';
+        return strtolower(self::SERVICE);
     }
 }

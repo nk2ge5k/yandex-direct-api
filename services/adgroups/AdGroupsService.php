@@ -15,6 +15,8 @@ use directapi\services\BaseService;
 
 class AdGroupsService extends BaseService
 {
+    const SERVICE = 'AdGroups';
+    
     /**
      * @param AdGroupAddItem[] $AdGroups
      * @throws \Exception
@@ -24,7 +26,7 @@ class AdGroupsService extends BaseService
     public function add(array $AdGroups)
     {
         $params = [
-            'AdGroups' => $AdGroups
+            self::SERVICE => $AdGroups
         ];
         return parent::doAdd($params);
     }
@@ -67,7 +69,7 @@ class AdGroupsService extends BaseService
         if ($Page) {
             $params['Page'] = $Page;
         }
-        return parent::doGet($params, 'AdGroups', null);
+        return parent::doGet($params, self::SERVICE, null);
     }
 
     /**
@@ -79,13 +81,13 @@ class AdGroupsService extends BaseService
     public function update(array $AdGroups)
     {
         $params = [
-            'AdGroups' => $AdGroups
+            self::SERVICE => $AdGroups
         ];
         return parent::doUpdate($params);
     }
 
     protected function getName()
     {
-        return 'adgroups';
+        return strtolower(self::SERVICE);
     }
 }

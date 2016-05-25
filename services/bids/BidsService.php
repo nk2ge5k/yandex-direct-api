@@ -14,6 +14,7 @@ use directapi\services\bids\models\BidSetItem;
 
 class BidsService extends BaseService
 {
+    const SERVICE = 'Bids';
     /**
      * @param BidsSelectionCriteria $SelectionCriteria
      * @param BidFieldEnum[]        $FieldNames
@@ -26,7 +27,7 @@ class BidsService extends BaseService
             'SelectionCriteria' => $SelectionCriteria,
             'FieldNames'        => $FieldNames
         ];
-        return $this->doGet($params, 'Bids', false);
+        return $this->doGet($params, self::SERVICE, false);
     }
 
     /**
@@ -37,11 +38,10 @@ class BidsService extends BaseService
     public function set(array $Bids)
     {
         $params = [
-            'Bids' => $Bids
+            self::SERVICE => $Bids
         ];
         $result = $this->call('set', $params);
         return $result->SetResults;
-        //return $this->mapArray($result->SetResults, ActionResult::class);
     }
 
     /**
@@ -52,15 +52,14 @@ class BidsService extends BaseService
     public function setAuto(array $Bids)
     {
         $params = [
-            'Bids' => $Bids
+            self::SERVICE => $Bids
         ];
         $result = $this->call('setAuto', $params);
         return $result->SetAutoResults;
-        //return $this->mapArray($result->SetAutoResults, BidActionResult::class);
     }
 
     protected function getName()
     {
-        return 'bids';
+        return strtolower(self::SERVICE);
     }
 }

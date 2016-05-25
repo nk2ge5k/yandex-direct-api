@@ -21,6 +21,7 @@ use directapi\services\bidmodifiers\results\ToggleResult;
 
 class BidModifiersService extends BaseService
 {
+    const SERVICE = 'BidModifiers';
     /**
      * @param BidModifierAddItem[] $BidModifiers
      *
@@ -29,7 +30,7 @@ class BidModifiersService extends BaseService
     public function add(array $BidModifiers)
     {
         $params = [
-            'BidModifiers' => $BidModifiers
+            self::SERVICE => $BidModifiers
         ];
         return parent::doAdd($params);
     }
@@ -76,7 +77,7 @@ class BidModifiersService extends BaseService
         if ($Page) {
             $params['Page'] = $Page;
         }
-        return parent::doGet($params, 'BidModifiers', false);
+        return parent::doGet($params, self::SERVICE, false);
     }
 
     /**
@@ -87,7 +88,7 @@ class BidModifiersService extends BaseService
     public function set(array $BidModifiers)
     {
         $params = [
-            'BidModifiers' => $BidModifiers
+            self::SERVICE => $BidModifiers
         ];
         $result = $this->call('set', $params);
         return $result->SetResults;
@@ -111,6 +112,6 @@ class BidModifiersService extends BaseService
 
     protected function getName()
     {
-        return 'bidmodifiers';
+        return strtolower(self::SERVICE);
     }
 }

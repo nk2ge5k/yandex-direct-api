@@ -13,6 +13,7 @@ use directapi\services\vcards\models\VCardGetItem;
 
 class VCardsService extends BaseService
 {
+    const SERVICE = 'VCards';
     /**
      * @param VCardAddItem[] $VCards
      *
@@ -21,7 +22,7 @@ class VCardsService extends BaseService
     public function add(array $VCards)
     {
         $params = [
-            'VCards' => $VCards
+            self::SERVICE => $VCards
         ];
         return parent::doAdd($params);
     }
@@ -51,11 +52,11 @@ class VCardsService extends BaseService
             $params['Page'] = $Page;
         }
 
-        return parent::doGet($params, 'VCards', null);
+        return parent::doGet($params, self::SERVICE, null);
     }
 
     protected function getName()
     {
-        return 'vcards';
+        return strtolower(self::SERVICE);
     }
 }
