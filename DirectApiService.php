@@ -15,14 +15,16 @@ use directapi\services\keywords\KeywordsService;
 use directapi\services\sitelinks\SitelinksService;
 use directapi\services\vcards\VCardsService;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Cache\FilesystemCache;
+use Doctrine\Common\Cache\PhpFileCache;
 use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\Mapping\Cache\DoctrineCache;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class DirectApiService
 {
     private $token;
-    private $login;
     private $clientLogin;
     private $apiUrl = 'https://api.direct.yandex.com/json/v5/';
 
@@ -80,11 +82,11 @@ class DirectApiService
      */
     private $adExtensionsService;
 
-    public function __construct($login, $token, $clientLogin)
+    public function __construct($token, $clientLogin)
     {
         AnnotationRegistry::registerLoader('class_exists');
+
         $this->token = $token;
-        $this->login = $login;
         $this->clientLogin = $clientLogin;
     }
 
@@ -233,6 +235,7 @@ class DirectApiService
 
             $this->validator = Validation::createValidatorBuilder()
                 ->enableAnnotationMapping()
+                ->setMetadataCache(new DoctrineCache(new FilesystemCache(__DIR__ . '/cache')))
                 ->getValidator();
         }
         return $this->validator;
