@@ -36,21 +36,20 @@ class VCardsService extends BaseService
     }
 
     /**
-     * @param IdsCriteria      $SelectionCriteria
      * @param VCardFieldEnum[] $FieldNames
+     * @param IdsCriteria      $SelectionCriteria
      * @param LimitOffset      $Page
      *
      * @return VCardGetItem[]
      */
-    public function get(IdsCriteria $SelectionCriteria, array $FieldNames, LimitOffset $Page)
+    public function get(array $FieldNames, IdsCriteria $SelectionCriteria = null, LimitOffset $Page = null)
     {
         $params = [
-            'SelectionCriteria' => $SelectionCriteria,
             'FieldNames'        => $FieldNames
         ];
-        if ($Page) {
-            $params['Page'] = $Page;
-        }
+
+        if ($SelectionCriteria) $params['SelectionCriteria'] = $SelectionCriteria;
+        if ($Page)              $params['Page'] = $Page;
 
         return parent::doGet($params, self::SERVICE, null);
     }
