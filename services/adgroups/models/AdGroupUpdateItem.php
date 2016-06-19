@@ -39,4 +39,10 @@ class AdGroupUpdateItem extends Model
      * @Assert\Valid()
      */
     public $MobileAppAdGroup;
+
+    /**
+     * @var DynamicTextAdGroupUpdate
+     * @Assert\Valid()
+     */
+    public $DynamicTextAdGroup;
 }

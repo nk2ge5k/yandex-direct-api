@@ -7,6 +7,7 @@ use directapi\common\criterias\LimitOffset;
 use directapi\common\results\ActionResult;
 use directapi\services\adgroups\criterias\AdGroupsSelectionCriteria;
 use directapi\services\adgroups\enum\AdGroupFieldEnum;
+use directapi\services\adgroups\enum\DynamicTextAdGroupFieldEnum;
 use directapi\services\adgroups\enum\MobileAppAdGroupFieldEnum;
 use directapi\services\adgroups\models\AdGroupAddItem;
 use directapi\services\adgroups\models\AdGroupGetItem;
@@ -40,13 +41,13 @@ class AdGroupsService extends BaseService
     }
 
     /**
-     * @param AdGroupsSelectionCriteria   $SelectionCriteria
-     * @param AdGroupFieldEnum[]          $FieldNames
-     * @param MobileAppAdGroupFieldEnum[] $MobileAppAdGroupFieldNames
-     * @param LimitOffset                 $Page
+     * @param AdGroupsSelectionCriteria     $SelectionCriteria
+     * @param AdGroupFieldEnum[]            $FieldNames
+     * @param MobileAppAdGroupFieldEnum[]   $MobileAppAdGroupFieldNames
+     * @param DynamicTextAdGroupFieldEnum[] $DynamicTextAdGroupFieldNames
+     * @param LimitOffset|null              $Page
      *
      * @return AdGroupGetItem[]
-     * @throws \Exception
      */
     public function get(
         AdGroupsSelectionCriteria $SelectionCriteria,

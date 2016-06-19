@@ -46,4 +46,9 @@ class AdGroupGetItem extends Model
      * @var MobileAppAdGroupGet
      */
     public $MobileAppAdGroup;
+
+    /**
+     * @var DynamicTextAdGroupGet
+     */
+    public $DynamicTextAdGroup;
 }
