@@ -14,9 +14,10 @@ use directapi\services\changes\ChangesService;
 use directapi\services\keywords\KeywordsService;
 use directapi\services\sitelinks\SitelinksService;
 use directapi\services\vcards\VCardsService;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Cache\FilesystemCache;
-use Doctrine\Common\Cache\PhpFileCache;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Mapping\Cache\CacheInterface;
 use Symfony\Component\Validator\Mapping\Cache\DoctrineCache;
@@ -85,18 +86,42 @@ class DirectApiService
     /**
      * @var CacheInterface
      */
-    protected $annotation_cache;
+    protected $annotationCache;
+    /**
+     * @var bool
+     */
+    protected $useOperatorPoints = FALSE;
 
-    public function __construct(
-        $token, $clientLogin, CacheInterface $annotation_cache = null)
-    {
+    /**
+     * DirectApiService constructor.
+     * @param $token
+     * @param null $clientLogin
+     * @param CacheInterface|null $annotation_cache
+     */
+    public function __construct($token, $clientLogin = null, CacheInterface $annotation_cache = null) {
         AnnotationRegistry::registerLoader('class_exists');
 
-        $this->annotation_cache = $annotation_cache !== null ?
+        $this->annotationCache = $annotation_cache !== null ?
             $annotation_cache : new FilesystemCache(__DIR__ . '/cache');
 
         $this->token = $token;
         $this->clientLogin = $clientLogin;
+    }
+
+    /**
+     * @param bool $use
+     * @return $this
+     */
+    public function useOperatoryPoints( bool $use ) {
+        $this->useOperatorPoints = $use;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUsingOperatorPoints() {
+        return $this->useOperatorPoints;
     }
 
     /**
@@ -243,13 +268,17 @@ class DirectApiService
         if (!$this->validator) {
 
             $this->validator = Validation::createValidatorBuilder()
-                ->enableAnnotationMapping()
-                ->setMetadataCache(new DoctrineCache($this->annotation_cache))
+                ->enableAnnotationMapping(new CachedReader(new AnnotationReader(), $this->annotationCache, true))
+                ->setMetadataCache(new DoctrineCache($this->annotationCache))
                 ->getValidator();
         }
         return $this->validator;
     }
 
+    /**
+     * @param $params
+     * @param $errors
+     */
     public function validate($params, &$errors) {
         if (is_array($params) || is_object($params)) {
             foreach ($params as $key => $value) {
@@ -277,18 +306,13 @@ class DirectApiService
      * @return resource
      */
     private function getCurl() {
+
         if (!$this->ch) {
             $this->ch = curl_init();
 
             curl_setopt_array(
                 $this->ch,
                 [
-                    CURLOPT_HTTPHEADER     => [
-                        'Content-Type: application/json; charset=utf-8',
-                        'Authorization: Bearer ' . $this->token,
-                        'Client-Login: ' . $this->clientLogin,
-                        'Accept-Language: ru'
-                    ],
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_FOLLOWLOCATION => true,
                     CURLOPT_POST           => 1,
@@ -298,6 +322,20 @@ class DirectApiService
                 ]
             );
         }
+
+        // Fixme
+        curl_setopt(
+            $this->ch,
+            CURLOPT_HTTPHEADER,
+            [
+                'Content-Type: application/json; charset=utf-8',
+                'Authorization: Bearer ' . $this->token,
+                'Client-Login: ' . $this->clientLogin,
+                'Accept-Language: ru',
+                'Use-Operator-Units: ' . (($this->useOperatorPoints) ? 'true' : 'false')
+            ]
+        );
+
 
         return $this->ch;
     }
