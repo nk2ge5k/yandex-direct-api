@@ -59,6 +59,10 @@ class TextAdAdd extends Model implements ICallbackValidation
      */
     public $DisplayUrlPath;
     /**
+     * @var array
+     */
+    public $AdExtensionIds;
+    /**
      * @Assert\Callback()
      * @param ExecutionContextInterface $context
      */
