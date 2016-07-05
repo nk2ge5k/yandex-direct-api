@@ -384,7 +384,7 @@ class DirectApiService
         $header = substr($response, 0, $header_size);
         $body = substr($response, $header_size);
 
-        $data = json_decode($body);
+        $data = json_decode($body, FALSE, 512, JSON_BIGINT_AS_STRING);
         $regex = '/Units: (\d+)\/(\d+)\/(\d+)/';
         if (preg_match($regex, $header, $matches)) {
             list(, $cost, $last, $limit) = $matches;
