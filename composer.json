@@ -1,18 +1,5 @@
 {
-  "name": "cimus/yandex-direct-api",
-  "description": "Client for Yandex.Direct API v5",
-  "keywords": ["yandex", "direct", "api"],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Andrey",
-      "email": "tugriky@gmail.com"
-    },
-    {
-      "name": "Sergey Ageev (Cimus)",
-      "email": "s_ageev@mail.ru"
-    }
-  ],
+  "name": "nk2ge5k/yandex-direct-api",
   "require": {
     "symfony/validator": "~2.2|~3.0",
     "doctrine/annotations": "^1.2.7",
