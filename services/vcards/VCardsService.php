@@ -36,13 +36,13 @@ class VCardsService extends BaseService
     }
 
     /**
-     * @param VCardFieldEnum[] $FieldNames
      * @param IdsCriteria      $SelectionCriteria
+     * @param VCardFieldEnum[] $FieldNames
      * @param LimitOffset      $Page
      *
      * @return VCardGetItem[]
      */
-    public function get(array $FieldNames, IdsCriteria $SelectionCriteria = null, LimitOffset $Page = null)
+    public function get(IdsCriteria $SelectionCriteria = null, array $FieldNames, LimitOffset $Page = null)
     {
         $params = [
             'FieldNames'        => $FieldNames
