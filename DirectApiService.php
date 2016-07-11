@@ -299,6 +299,7 @@ class DirectApiService
     public function validate($params, &$errors) {
         if (is_array($params) || is_object($params)) {
             foreach ($params as $key => $value) {
+                if( $value === self::NULL ) continue;
                 if (!is_array($value) && !is_object($value)) continue;
 
                 $result = $this->getValidator()->validate($value);
