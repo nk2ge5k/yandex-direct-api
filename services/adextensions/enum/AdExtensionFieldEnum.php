@@ -10,6 +10,7 @@ class AdExtensionFieldEnum extends Enum
 {
     const Id = "Id";
     const Type = "Type";
+    const State = "State";
     const Status = "Status";
     const StatusClarification = "StatusClarification";
     const Associated = "Associated";
