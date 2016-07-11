@@ -3,6 +3,7 @@
 namespace directapi\services\adextensions;
 
 use directapi\common\criterias\IdsCriteria;
+use directapi\common\criterias\LimitOffset;
 use directapi\common\results\ActionResult;
 use directapi\services\adextensions\criterias\AdExtensionsSelectionCriteria;
 use directapi\services\adextensions\models\AdExtensionsAddItem;
@@ -35,20 +36,18 @@ class AdExtensionsService extends BaseService
     /**
      * @inheritdoc
      */
-    public function get(AdExtensionsSelectionCriteria $SelectionCriteria,
-                        $fieldNames,
-                        $сalloutFieldNames = [],
-                        $limit = 10000,
-                        $offset = 0
+    public function get(
+        AdExtensionsSelectionCriteria $SelectionCriteria = null,
+        $fieldNames,
+        $сalloutFieldNames = [],
+        LimitOffset $Page = null
     ) {
         $params = [
-            'SelectionCriteria' => $SelectionCriteria,
-            'FieldNames' => $fieldNames,
-            'Page' => [
-                'Limit' => $limit,
-                'Offset' => $offset
-            ]
+            'FieldNames' => $fieldNames
         ];
+
+        if ($SelectionCriteria) $params['SelectionCriteria'] = $SelectionCriteria;
+        if ( $Page )            $params['Page'] = $Page;
 
         if($сalloutFieldNames && is_array($сalloutFieldNames)){
             $params['CalloutFieldNames'] = $сalloutFieldNames;
