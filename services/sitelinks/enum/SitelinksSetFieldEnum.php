@@ -2,7 +2,9 @@
 
 namespace directapi\services\sitelinks\enum;
 
-class SitelinksSetFieldEnum
+use directapi\components\Enum;
+
+class SitelinksSetFieldEnum extends Enum
 {
     const Id = 'Id';
     const Sitelinks = 'Sitelinks';
