@@ -3,6 +3,7 @@
 namespace directapi\services\ads;
 
 use directapi\common\criterias\IdsCriteria;
+use directapi\common\criterias\LimitOffset;
 use directapi\common\results\ActionResult;
 use directapi\services\ads\criterias\AdsSelectionCriteria;
 use directapi\services\ads\models\AdAddItem;
@@ -47,16 +48,17 @@ class AdsService extends BaseService
                         $textAdFieldNames = false,
                         $MobileAppAdFieldNames = false,
                         $DynamicTextAdFieldNames = false,
-                        $limit = 10000,
-                        $offset = 0
+                        LimitOffset $Page = null
     ) {
+
+        if ( $Page === NULL ) {
+            $Page = LimitOffset::init(0, 10000);
+        }
+
         $params = [
             'SelectionCriteria' => $SelectionCriteria,
             'FieldNames' => $fieldNames,
-            'Page' => [
-                'Limit' => $limit,
-                'Offset' => $offset
-            ]
+            'Page' => $Page
         ];
 
         if($textAdFieldNames && is_array($textAdFieldNames)){
