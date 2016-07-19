@@ -7,7 +7,6 @@ use directapi\common\criterias\LimitOffset;
 use directapi\common\results\ActionResult;
 use directapi\services\ads\criterias\AdsSelectionCriteria;
 use directapi\services\ads\models\AdAddItem;
-use directapi\services\ads\models\AdGetItem;
 use directapi\services\ads\models\AdUpdateItem;
 use directapi\services\BaseService;
 
