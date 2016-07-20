@@ -3,7 +3,9 @@
 namespace directapi\services\changes\enum;
 
 
-class FieldNamesEnum
+use directapi\components\Enum;
+
+class FieldNamesEnum extends Enum
 {
     const CampaignIds = 'CampaignIds';
     const CampaignsStat = 'CampaignsStat';
