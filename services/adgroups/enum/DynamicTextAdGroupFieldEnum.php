@@ -7,4 +7,5 @@ use directapi\components\Enum;
 class DynamicTextAdGroupFieldEnum extends Enum
 {
     const DomainUrl = 'DomainUrl';
+    const DomainUrlProcessingStatus = 'DomainUrlProcessingStatus';
 }
