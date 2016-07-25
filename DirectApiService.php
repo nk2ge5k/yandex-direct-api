@@ -2,6 +2,7 @@
 
 namespace directapi;
 
+use directapi\exceptions\DirectApiCurlException;
 use directapi\exceptions\DirectApiException;
 use directapi\exceptions\RequestValidationException;
 use directapi\services\adextensions\AdExtensionsService;
@@ -111,8 +112,9 @@ class DirectApiService
         $this->annotationCache = $annotation_cache !== null ?
             $annotation_cache : new FilesystemCache(__DIR__ . '/cache');
 
-        $this->token = $token;
-        $this->clientLogin = $clientLogin;
+        $this
+            ->setToken($token)
+            ->setClientLogin($clientLogin);
     }
 
     /**
@@ -130,6 +132,7 @@ class DirectApiService
      */
     public function useOperatorPoints( bool $use ) {
         $this->useOperatorPoints = $use;
+
         return $this;
     }
 
@@ -138,6 +141,34 @@ class DirectApiService
      */
     public function isUsingOperatorPoints() {
         return $this->useOperatorPoints;
+    }
+
+    /**
+     * @param string $token
+     * @return $this
+     */
+    public function setToken ( string $token ) {
+        if ( empty($token) ) {
+            throw new \InvalidArgumentException('Token must be not empty');
+        }
+
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @param string $clientLogin
+     * @return $this
+     */
+    public function setClientLogin( string $clientLogin ) {
+        if ( empty($clientLogin) ) {
+            throw new \InvalidArgumentException('Client login must be not empty');
+        }
+
+        $this->clientLogin = $clientLogin;
+
+        return $this;
     }
 
     /**
@@ -388,8 +419,11 @@ class DirectApiService
      * @param $serviceName
      * @param $method
      * @param $request
+     *
      * @return object
-     * @throws \directapi\exceptions\DirectApiException
+     *
+     * @throws DirectApiException
+     * @throws DirectApiCurlException
      */
     public function getResponse($serviceName, $method, $request) {
         $curl = $this->getCurl();
@@ -406,37 +440,42 @@ class DirectApiService
                 CURLOPT_POSTFIELDS => $request
             ]
         );
-        $response = curl_exec($curl);
+        if ( ($response = curl_exec($curl)) !== FALSE ) {
 
-        $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-        $header = substr($response, 0, $header_size);
-        $body = substr($response, $header_size);
+            $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+            $header = substr($response, 0, $header_size);
+            $body = substr($response, $header_size);
 
-        $data = json_decode($body, FALSE, 512, JSON_BIGINT_AS_STRING);
-        $regex = '/Units: (\d+)\/(\d+)\/(\d+)/';
-        if (preg_match($regex, $header, $matches)) {
-            list(, $cost, $last, $limit) = $matches;
-            $this->units = $last;
-            $this->lastCallCost = $cost;
-            $this->unitsLimit = $limit;
-        }
-
-        if (isset($data->error)) {
-            // Лимит подключений к Яндексу
-            if ($data->error->error_code == 506) {
-                usleep(100);
-                return $this->getResponse($serviceName, $method, $request);
+            $data = json_decode($body, FALSE, 512, JSON_BIGINT_AS_STRING);
+            $regex = '/Units: (\d+)\/(\d+)\/(\d+)/';
+            if (preg_match($regex, $header, $matches)) {
+                list(, $cost, $last, $limit) = $matches;
+                $this->units = $last;
+                $this->lastCallCost = $cost;
+                $this->unitsLimit = $limit;
             }
-            throw new DirectApiException(
-                $data->error->error_string . '. ' . $data->error->error_detail . ' (' . $serviceName . ', ' . $method . ')',
-                $data->error->error_code
-            );
+
+            if (isset($data->error)) {
+                // Лимит подключений к Яндексу
+                if ($data->error->error_code == 506) {
+                    usleep(100);
+                    return $this->getResponse($serviceName, $method, $request);
+                }
+                throw new DirectApiException(
+                    $data->error->error_string . '. ' . $data->error->error_detail . ' (' . $serviceName . ', ' . $method . ')',
+                    $data->error->error_code
+                );
+            }
+
+            if (!is_object($data)) {
+                var_dump($response, $data, $request);
+                throw new DirectApiException('Данные не получены', 0);
+            }
+
+        } else {
+            throw new DirectApiCurlException('Curl error: ' . curl_error($curl), curl_errno($curl));
         }
 
-        if (!is_object($data)) {
-            var_dump($response, $data, $request);
-            throw new DirectApiException('Данные не получены', 0);
-        }
         return $data;
     }
 }
