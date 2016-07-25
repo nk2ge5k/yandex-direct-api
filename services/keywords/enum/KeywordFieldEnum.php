@@ -18,4 +18,6 @@ class KeywordFieldEnum extends Enum
     const UserParam1 = 'UserParam1';
     const UserParam2 = 'UserParam2';
     const Productivity = 'Productivity';
+    const StatisticsSearch = 'StatisticsSearch';
+    const StatisticsNetwork = 'StatisticsNetwork';
 }
