@@ -106,7 +106,7 @@ class DirectApiService
      * @param null $clientLogin
      * @param CacheInterface|null $annotation_cache
      */
-    public function __construct($token, $clientLogin = null, CacheInterface $annotation_cache = null) {
+    public function __construct($token = null, $clientLogin = null, CacheInterface $annotation_cache = null) {
         AnnotationRegistry::registerLoader('class_exists');
 
         $this->annotationCache = $annotation_cache !== null ?
