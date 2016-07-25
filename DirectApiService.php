@@ -112,9 +112,14 @@ class DirectApiService
         $this->annotationCache = $annotation_cache !== null ?
             $annotation_cache : new FilesystemCache(__DIR__ . '/cache');
 
-        $this
-            ->setToken($token)
-            ->setClientLogin($clientLogin);
+        if ( $token !== NULL ) {
+            $this->token = $token;
+        }
+
+        if ( $clientLogin !== NULL ) {
+            $this->clientLogin = $clientLogin;
+        }
+
     }
 
     /**
