@@ -118,15 +118,6 @@ class DirectApiService
     }
 
     /**
-     * @deprecated
-     * @param bool $use
-     * @return $this
-     */
-    public function useOperatoryPoints( bool $use ) {
-        return $this->useOperatorPoints($use);
-    }
-
-    /**
      * @param bool $use
      * @return $this
      */
