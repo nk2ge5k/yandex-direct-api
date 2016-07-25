@@ -456,11 +456,6 @@ class DirectApiService
             }
 
             if (isset($data->error)) {
-                // Лимит подключений к Яндексу
-                if ($data->error->error_code == 506) {
-                    usleep(100);
-                    return $this->getResponse($serviceName, $method, $request);
-                }
                 throw new DirectApiException(
                     $data->error->error_string . '. ' . $data->error->error_detail . ' (' . $serviceName . ', ' . $method . ')',
                     $data->error->error_code
