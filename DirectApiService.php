@@ -143,11 +143,7 @@ class DirectApiService
      * @param string $token
      * @return $this
      */
-    public function setToken ( string $token ) {
-        if ( empty($token) ) {
-            throw new \InvalidArgumentException('Token must be not empty');
-        }
-
+    public function setToken ( $token ) {
         $this->token = $token;
 
         return $this;
@@ -157,11 +153,7 @@ class DirectApiService
      * @param string $clientLogin
      * @return $this
      */
-    public function setClientLogin( string $clientLogin ) {
-        if ( empty($clientLogin) ) {
-            throw new \InvalidArgumentException('Client login must be not empty');
-        }
-
+    public function setClientLogin( $clientLogin ) {
         $this->clientLogin = $clientLogin;
 
         return $this;
