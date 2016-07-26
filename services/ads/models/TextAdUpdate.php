@@ -9,7 +9,7 @@ use directapi\components\Model;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class TextAdUpdate extends Model implements ICallbackValidation
+class TextAdUpdate extends Model
 {
     /**
      * @var string
@@ -65,17 +65,4 @@ class TextAdUpdate extends Model implements ICallbackValidation
      * @var AdExtensionSetting
      */
     public $CalloutSetting;
-    
-    /**
-     * @Assert\Callback()
-     * @param ExecutionContextInterface $context
-     */
-    public function isValid(ExecutionContextInterface $context)
-    {
-        if (!$this->Href && $this->SitelinkSetId) {
-            $context->buildViolation('Нельзя указать SitelinkSetId при пустом Href')
-                ->atPath('SitelinkSetId')
-                ->addViolation();
-        }
-    }
 }
