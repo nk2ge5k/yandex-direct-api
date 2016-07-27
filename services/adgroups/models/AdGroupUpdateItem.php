@@ -17,7 +17,7 @@ class AdGroupUpdateItem extends Model
      * @var string
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      max = 1024
+     *      max = 255
      * )
      */
     public $Name;
