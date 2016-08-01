@@ -4,6 +4,7 @@ namespace directapi;
 
 use directapi\exceptions\DirectApiCurlException;
 use directapi\exceptions\DirectApiException;
+use directapi\exceptions\DirectApiNullException;
 use directapi\exceptions\RequestValidationException;
 use directapi\services\adextensions\AdExtensionsService;
 use directapi\services\adgroups\AdGroupsService;
@@ -451,8 +452,7 @@ class DirectApiService
             }
 
             if (!is_object($data)) {
-                var_dump($response, $data, $request);
-                throw new DirectApiException('Данные не получены', 0);
+                throw new DirectApiNullException('Данные не получены');
             }
 
         } else {
