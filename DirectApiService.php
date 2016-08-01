@@ -354,6 +354,14 @@ class DirectApiService
      */
     private function getCurl() {
 
+        if ( !$this->token ) {
+            throw new \RuntimeException('Missing authorization token');
+        }
+
+        if ( !$this->clientLogin ) {
+            throw new \RuntimeException('Missing client login');
+        }
+
         if (!$this->ch) {
             $this->ch = curl_init();
 
@@ -413,6 +421,7 @@ class DirectApiService
      *
      * @throws DirectApiException
      * @throws DirectApiCurlException
+     * @throws DirectApiNullException
      */
     public function getResponse($serviceName, $method, $request) {
         $curl = $this->getCurl();
