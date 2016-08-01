@@ -145,6 +145,12 @@ class DirectApiService
      * @return $this
      */
     public function setToken ( $token ) {
+        if ( !is_string($token) and $token !== NULL ) {
+            throw new \InvalidArgumentException(
+                'Token must be type of string or NULL, ' . gettype($token) . ' given'
+            );
+        }
+
         $this->token = $token;
 
         return $this;
@@ -155,6 +161,11 @@ class DirectApiService
      * @return $this
      */
     public function setClientLogin( $clientLogin ) {
+        if ( !is_string($clientLogin) and $clientLogin !== NULL ) {
+            throw new \InvalidArgumentException(
+                'Client login must be type of string or NULL, ' . gettype($clientLogin) . ' given'
+            );
+        }
         $this->clientLogin = $clientLogin;
 
         return $this;
