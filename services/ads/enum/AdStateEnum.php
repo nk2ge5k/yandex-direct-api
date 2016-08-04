@@ -12,5 +12,4 @@ class AdStateEnum extends Enum
     const SUSPENDED = 'SUSPENDED';
     const OFF_BY_MONITORING = 'OFF_BY_MONITORING';
     const ARCHIVED = 'ARCHIVED';
-    const UNKNOWN = 'UNKNOWN';
 }
