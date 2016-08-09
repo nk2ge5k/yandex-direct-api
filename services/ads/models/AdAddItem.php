@@ -10,11 +10,13 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class AdAddItem extends Model implements ICallbackValidation
 {
     /**
+     * @Assert\Valid()
      * @var TextAdAdd
      */
     public $TextAd;
 
     /**
+     * @Assert\Valid()
      * @var MobileAppAdAdd
      */
     public $MobileAppAd;
