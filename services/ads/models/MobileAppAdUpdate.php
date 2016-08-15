@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MobileAppAdUpdate extends Model
 {
     /**
-     * @var string
+     * @var string|null
      * @Assert\Length(
      *     max="33"
      * )
@@ -17,7 +17,7 @@ class MobileAppAdUpdate extends Model
     public $Title;
 
     /**
-     * @var string
+     * @var string|null
      * @Assert\Length(
      *     max="75"
      * )
@@ -25,7 +25,7 @@ class MobileAppAdUpdate extends Model
     public $Text;
 
     /**
-     * @var string
+     * @var string|null
      * @Assert\Length(
      *     max="1024"
      * )
@@ -33,18 +33,18 @@ class MobileAppAdUpdate extends Model
     public $TrackingUrl;
 
     /**
-     * @var MobileAppAdFeatureItem[]
+     * @var MobileAppAdFeatureItem[]|null
      */
     public $Features;
 
     /**
-     * @var \directapi\services\ads\enum\AgeLabelEnum
+     * @var \directapi\services\ads\enum\AgeLabelEnum|null
      * @DirectApiAssert\IsEnum(type="directapi\services\ads\enum\AgeLabelEnum")
      */
     public $AgeLabel;
 
     /**
-     * @var \directapi\services\ads\enum\MobileAppAdActionEnum
+     * @var \directapi\services\ads\enum\MobileAppAdActionEnum|null
      * @Assert\NotBlank()
      * @DirectApiAssert\IsEnum(type="directapi\services\ads\enum\MobileAppAdActionEnum")
      */

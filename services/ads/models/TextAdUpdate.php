@@ -4,15 +4,13 @@ namespace directapi\services\ads\models;
 
 
 use directapi\components\constraints as DirectApiAssert;
-use directapi\components\interfaces\ICallbackValidation;
 use directapi\components\Model;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class TextAdUpdate extends Model
 {
     /**
-     * @var string
+     * @var string|null
      * @Assert\Length(
      *     max="33"
      * )
@@ -20,7 +18,7 @@ class TextAdUpdate extends Model
     public $Title;
 
     /**
-     * @var string
+     * @var string|null
      * @Assert\Length(
      *     max="75"
      * )
@@ -28,7 +26,7 @@ class TextAdUpdate extends Model
     public $Text;
 
     /**
-     * @var string
+     * @var string|null
      * @Assert\Length(
      *     max="1024"
      * )
@@ -36,33 +34,33 @@ class TextAdUpdate extends Model
     public $Href;
 
     /**
-     * @var \directapi\services\ads\enum\AgeLabelEnum
+     * @var \directapi\services\ads\enum\AgeLabelEnum|null
      * @DirectApiAssert\IsEnum(type="directapi\services\ads\enum\AgeLabelEnum")
      */
     public $AgeLabel;
 
     /**
-     * @var int
+     * @var int|null
      */
     public $VCardId;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $AdImageHash;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $DisplayUrlPath;
     
     /**
-     * @var int
+     * @var int|null
      */
     public $SitelinkSetId;
     
     /**
-     * @var AdExtensionSetting
+     * @var AdExtensionSetting|null
      */
     public $CalloutSetting;
 }
