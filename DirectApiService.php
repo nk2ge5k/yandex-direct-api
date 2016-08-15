@@ -172,6 +172,13 @@ class DirectApiService
     }
 
     /**
+     * @return string|null
+     */
+    public function getClientLogin() {
+        return $this->clientLogin;
+    }
+
+    /**
      * @return AdGroupsService
      */
     public function getAdGroupsService()
