@@ -32,7 +32,7 @@ class AdImagesService extends BaseService
      * @param AdImageIdsCriteria $criteria
      * @return \directapi\common\results\ActionResult[]
      */
-    public function delete ( AdImageIdsCriteria $criteria ) {
+    public function deleteImages ( AdImageIdsCriteria $criteria ) {
         $params = [
             'SelectionCriteria' => $criteria
         ];
