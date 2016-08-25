@@ -82,6 +82,11 @@ abstract class BaseService
             'add'    => [5, 1],
             'get'    => [5, 1],
             'delete' => [10, 1]
+        ],
+        'adimages' => [
+            'add'    => [20, 20],
+            'get'    => [10, 0],
+            'delete' => [10, 1]
         ]
     ];
 
@@ -132,6 +137,11 @@ abstract class BaseService
         ],
         'adextensions' => [
             'add'    => 1000,
+            'get'    => 10000,
+            'delete' => 10000
+        ],
+        'adimages' => [
+            'add'    => 100,
             'get'    => 10000,
             'delete' => 10000
         ]
