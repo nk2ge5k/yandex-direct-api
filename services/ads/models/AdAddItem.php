@@ -22,6 +22,12 @@ class AdAddItem extends Model implements ICallbackValidation
     public $MobileAppAd;
 
     /**
+     * @Assert\Valid()
+     * @var DynamicTextAdAdd
+     */
+    public $DynamicTextAd;
+
+    /**
      * @var int
      * @Assert\NotBlank()
      */
@@ -33,10 +39,11 @@ class AdAddItem extends Model implements ICallbackValidation
      */
     public function isValid(ExecutionContextInterface $context)
     {
-        if (!$this->TextAd && !$this->MobileAppAd) {
-            $context->buildViolation('Необходимо указать TextAd либо MobileAppAd')
+        if (!$this->TextAd && !$this->MobileAppAd && !$this->DynamicTextAd ) {
+            $context->buildViolation('Необходимо указать TextAd либо MobileAppAd либо DynamicTextAd')
                 ->atPath('TextAd')
                 ->atPath('MobileAppAd')
+                ->atPath('DynamicTextAd')
                 ->addViolation();
         }
     }
