@@ -8,6 +8,7 @@ use directapi\exceptions\DirectApiNullException;
 use directapi\exceptions\RequestValidationException;
 use directapi\services\adextensions\AdExtensionsService;
 use directapi\services\adgroups\AdGroupsService;
+use directapi\services\adimages\AdImagesService;
 use directapi\services\ads\AdsService;
 use directapi\services\bidmodifiers\BidModifiersService;
 use directapi\services\bids\BidsService;
@@ -92,6 +93,10 @@ class DirectApiService
      * @var DictionariesService
      */
     private $dictionariesService;
+    /**
+     * @var AdImagesService
+     */
+    private $adImagesService;
     /**
      * @var CacheInterface
      */
@@ -297,6 +302,16 @@ class DirectApiService
             $this->dictionariesService = new DictionariesService($this);
         }
         return $this->dictionariesService;
+    }
+
+    /**
+     * @return AdImagesService
+     */
+    public function getAdImagesService(){
+        if ( !$this->adImagesService ) {
+            $this->adImagesService = new AdImagesService($this);
+        }
+        return $this->adImagesService;
     }
 
     /**
