@@ -10,6 +10,12 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class AdAddItem extends Model implements ICallbackValidation
 {
     /**
+     * @var int
+     * @Assert\NotBlank()
+     */
+    public $AdGroupId;
+
+    /**
      * @Assert\Valid()
      * @var TextAdAdd
      */
@@ -28,10 +34,16 @@ class AdAddItem extends Model implements ICallbackValidation
     public $DynamicTextAd;
 
     /**
-     * @var int
-     * @Assert\NotBlank()
+     * @Assert\Valid()
+     * @var TextAdAdd
      */
-    public $AdGroupId;
+    public $TextImageAd;
+
+    /**
+     * @Assert\Valid()
+     * @var MobileAppImageAdAdd
+     */
+    public $MobileAppImageAd;
 
     /**
      * @Assert\Callback()
@@ -39,11 +51,21 @@ class AdAddItem extends Model implements ICallbackValidation
      */
     public function isValid(ExecutionContextInterface $context)
     {
-        if (!$this->TextAd && !$this->MobileAppAd && !$this->DynamicTextAd ) {
-            $context->buildViolation('Необходимо указать TextAd либо MobileAppAd либо DynamicTextAd')
+        if (
+            !$this->TextAd &&
+            !$this->MobileAppAd &&
+            !$this->DynamicTextAd &&
+            !$this->TextImageAd &&
+            !$this->MobileAppImageAd
+        ) {
+            $context->buildViolation(
+                'Необходимо указать TextAd либо MobileAppAd либо DynamicTextAd либо TextImageAd либо MobileAppImageAd'
+            )
                 ->atPath('TextAd')
                 ->atPath('MobileAppAd')
                 ->atPath('DynamicTextAd')
+                ->atPath('TextImageAd')
+                ->atPath('$MobileAppImageAd')
                 ->addViolation();
         }
     }

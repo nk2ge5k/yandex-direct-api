@@ -34,16 +34,38 @@ class AdUpdateItem extends Model implements ICallbackValidation
     public $DynamicTextAd;
 
     /**
+     * @Assert\Valid()
+     * @var TextAdAdd
+     */
+    public $TextImageAd;
+
+    /**
+     * @Assert\Valid()
+     * @var MobileAppImageAdAdd
+     */
+    public $MobileAppImageAd;
+
+    /**
      * @Assert\Callback()
      * @param ExecutionContextInterface $context
      */
     public function isValid(ExecutionContextInterface $context)
     {
-        if (!$this->TextAd && !$this->MobileAppAd && !$this->DynamicTextAd) {
-            $context->buildViolation('Необходимо указать TextAd либо MobileAppAd либо DynamicTextAd')
+        if (
+            !$this->TextAd &&
+            !$this->MobileAppAd &&
+            !$this->DynamicTextAd &&
+            !$this->TextImageAd &&
+            !$this->MobileAppImageAd
+        ) {
+            $context->buildViolation(
+                'Необходимо указать TextAd либо MobileAppAd либо DynamicTextAd либо TextImageAd либо MobileAppImageAd'
+            )
                 ->atPath('TextAd')
                 ->atPath('MobileAppAd')
                 ->atPath('DynamicTextAd')
+                ->atPath('TextImageAd')
+                ->atPath('$MobileAppImageAd')
                 ->addViolation();
         }
     }
