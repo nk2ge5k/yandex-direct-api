@@ -33,7 +33,11 @@ class AdImagesService extends BaseService
      * @return \directapi\common\results\ActionResult[]
      */
     public function delete ( AdImageIdsCriteria $criteria ) {
-        return parent::delete($criteria);
+        $params = [
+            'SelectionCriteria' => $criteria
+        ];
+        $response = $this->call('delete', $params);
+        return $response->DeleteResults;
     }
 
     /**
