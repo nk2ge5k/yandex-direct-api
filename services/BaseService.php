@@ -4,7 +4,6 @@ namespace directapi\services;
 
 use directapi\common\criterias\IdsCriteria;
 use directapi\common\results\ActionResult;
-use directapi\components\Model;
 use directapi\DirectApiService;
 
 abstract class BaseService
@@ -218,11 +217,11 @@ abstract class BaseService
     }
 
     /**
-     * @param Model $SelectionCriteria
+     * @param IdsCriteria $SelectionCriteria
      *
      * @return ActionResult[]
      */
-    protected function delete(Model $SelectionCriteria)
+    protected function delete(IdsCriteria $SelectionCriteria)
     {
         $params = [
             'SelectionCriteria' => $SelectionCriteria
