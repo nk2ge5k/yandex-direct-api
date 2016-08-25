@@ -6,6 +6,12 @@ use directapi\common\criterias\IdsCriteria;
 use directapi\common\criterias\LimitOffset;
 use directapi\common\results\ActionResult;
 use directapi\services\ads\criterias\AdsSelectionCriteria;
+use directapi\services\ads\enum\AdFieldEnum;
+use directapi\services\ads\enum\DynamicTextAdFieldEnum;
+use directapi\services\ads\enum\MobileAppAdFieldEnum;
+use directapi\services\ads\enum\MobileAppImageAdFieldEnum;
+use directapi\services\ads\enum\TextAdFieldEnum;
+use directapi\services\ads\enum\TextImageAdFieldEnum;
 use directapi\services\ads\models\AdAddItem;
 use directapi\services\ads\models\AdUpdateItem;
 use directapi\services\BaseService;
@@ -42,12 +48,26 @@ class AdsService extends BaseService
         return parent::delete($SelectionCriteria);
     }
 
-    public function get(AdsSelectionCriteria $SelectionCriteria,
-                        $fieldNames,
-                        $textAdFieldNames = false,
-                        $MobileAppAdFieldNames = false,
-                        $DynamicTextAdFieldNames = false,
-                        LimitOffset $Page = null
+    /**
+     * @param AdsSelectionCriteria $SelectionCriteria
+     * @param AdFieldEnum[] $fieldNames
+     * @param TextAdFieldEnum[] $textAdFieldNames
+     * @param MobileAppAdFieldEnum[] $MobileAppAdFieldNames
+     * @param DynamicTextAdFieldEnum[] $DynamicTextAdFieldNames
+     * @param TextImageAdFieldEnum[] $TextImageAdFieldNames
+     * @param MobileAppImageAdFieldEnum[] $MobileAppImageAdFieldNames
+     * @param LimitOffset|null $Page
+     * @return array
+     */
+    public function get(
+        AdsSelectionCriteria $SelectionCriteria,
+        $fieldNames,
+        $textAdFieldNames = false,
+        $MobileAppAdFieldNames = false,
+        $DynamicTextAdFieldNames = false,
+        $TextImageAdFieldNames = false,
+        $MobileAppImageAdFieldNames = false,
+        LimitOffset $Page = null
     ) {
 
         if ( $Page === NULL ) {
@@ -68,6 +88,12 @@ class AdsService extends BaseService
         }
         if($DynamicTextAdFieldNames && is_array($DynamicTextAdFieldNames)){
             $params['DynamicTextAdFieldNames'] = $DynamicTextAdFieldNames;
+        }
+        if($TextImageAdFieldNames && is_array($TextImageAdFieldNames)){
+            $params['TextImageAdFieldNames'] = $TextImageAdFieldNames;
+        }
+        if($MobileAppImageAdFieldNames && is_array($MobileAppImageAdFieldNames)){
+            $params['MobileAppImageAdFieldNames'] = $MobileAppImageAdFieldNames;
         }
         return parent::doGet($params, self::SERVICE, null);
     }
