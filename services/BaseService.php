@@ -231,7 +231,7 @@ abstract class BaseService
      *
      * @return ActionResult[]
      */
-    protected function delete(IdsCriteria $SelectionCriteria)
+    protected function delete($SelectionCriteria)
     {
         $params = [
             'SelectionCriteria' => $SelectionCriteria
