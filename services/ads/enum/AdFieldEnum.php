@@ -16,4 +16,5 @@ class AdFieldEnum extends Enum
     const Status = 'Status';
     const StatusClarification = 'StatusClarification';
     const Type = 'Type';
+    const Subtype = 'Subtype';
 }
