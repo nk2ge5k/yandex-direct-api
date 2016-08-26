@@ -14,6 +14,7 @@ use directapi\services\bidmodifiers\BidModifiersService;
 use directapi\services\bids\BidsService;
 use directapi\services\campaigns\CampaignsService;
 use directapi\services\changes\ChangesService;
+use directapi\services\clients\ClientsService;
 use directapi\services\dictionaries\DictionariesService;
 use directapi\services\keywords\KeywordsService;
 use directapi\services\sitelinks\SitelinksService;
@@ -97,6 +98,10 @@ class DirectApiService
      * @var AdImagesService
      */
     private $adImagesService;
+    /**
+     * @var ClientsService
+     */
+    private $clientsService;
     /**
      * @var CacheInterface
      */
@@ -312,6 +317,16 @@ class DirectApiService
             $this->adImagesService = new AdImagesService($this);
         }
         return $this->adImagesService;
+    }
+
+    /**
+     * @return ClientsService
+     */
+    public function getClientsService() {
+        if ( !$this->clientsService ) {
+            $this->clientsService = new ClientsService($this);
+        }
+        return $this->clientsService;
     }
 
     /**
