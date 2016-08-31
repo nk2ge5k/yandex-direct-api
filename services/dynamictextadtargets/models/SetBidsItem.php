@@ -4,7 +4,7 @@
 namespace directapi\services\dynamictextadtargets\models;
 
 
-use directapi\common\enum\PriorityEnum;
+use directapi\components\constraints\IsEnum;
 use directapi\components\interfaces\ICallbackValidation;
 use directapi\components\Model;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -33,7 +33,9 @@ class SetBidsItem extends Model implements ICallbackValidation
      */
     public $ContextBid;
     /**
-     * @var PriorityEnum
+     * @var \directapi\common\enum\PriorityEnum
+     *
+     * @IsEnum(type="directapi\common\enum\PriorityEnum")
      */
     public $StrategyPriority;
 
