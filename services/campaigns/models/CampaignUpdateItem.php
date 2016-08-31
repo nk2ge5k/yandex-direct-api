@@ -100,4 +100,11 @@ class CampaignUpdateItem extends Model
      * @Assert\Type(type="directapi\services\campaigns\models\MobileAppCampaignItem")
      */
     public $MobileAppCampaign;
+
+    /**
+     * @var DynamicTextCampaignItem
+     * @Assert\Valid()
+     * @Assert\Type(type="directapi\services\campaigns\models\DynamicTextCampaign")
+     */
+    public $DynamicTextCampaign;
 }
