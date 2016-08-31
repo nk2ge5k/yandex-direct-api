@@ -4,8 +4,8 @@
 namespace directapi\services\dynamictextadtargets\models;
 
 
-use directapi\common\enum\PriorityEnum;
 use directapi\components\constraints\ArrayOf;
+use directapi\components\constraints\IsEnum;
 use directapi\components\Model;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -40,7 +40,9 @@ class WebpageAddItem extends Model
      */
     public $ContextBid;
     /**
-     * @var PriorityEnum
+     * @var \directapi\common\enum\PriorityEnum
+     *
+     * @IsEnum(type="directapi\common\enum\PriorityEnum")
      */
     public $StrategyPriority;
 }
