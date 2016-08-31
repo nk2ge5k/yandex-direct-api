@@ -19,6 +19,7 @@ use directapi\services\dictionaries\DictionariesService;
 use directapi\services\keywords\KeywordsService;
 use directapi\services\sitelinks\SitelinksService;
 use directapi\services\vcards\VCardsService;
+use directapi\services\dynamictextadtargets\DynamicTextAdTargetsService;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\CachedReader;
@@ -102,6 +103,10 @@ class DirectApiService
      * @var ClientsService
      */
     private $clientsService;
+    /**
+     * @var DynamicTextAdTargetsService
+     */
+    private $dynamicTextAdTargetsService;
     /**
      * @var CacheInterface
      */
@@ -302,7 +307,8 @@ class DirectApiService
     /**
      * @return DictionariesService
      */
-    public function getDictionariesService() {
+    public function getDictionariesService()
+    {
         if (!$this->dictionariesService){
             $this->dictionariesService = new DictionariesService($this);
         }
@@ -312,7 +318,8 @@ class DirectApiService
     /**
      * @return AdImagesService
      */
-    public function getAdImagesService(){
+    public function getAdImagesService()
+    {
         if ( !$this->adImagesService ) {
             $this->adImagesService = new AdImagesService($this);
         }
@@ -322,11 +329,23 @@ class DirectApiService
     /**
      * @return ClientsService
      */
-    public function getClientsService() {
+    public function getClientsService()
+    {
         if ( !$this->clientsService ) {
             $this->clientsService = new ClientsService($this);
         }
         return $this->clientsService;
+    }
+
+    /**
+     * @return DynamicTextAdTargetsService
+     */
+    public function getDynamicTextAdTargetsService()
+    {
+        if ( !$this->dynamicTextAdTargetsService ) {
+            $this->dynamicTextAdTargetsService = new DynamicTextAdTargetsService($this);
+        }
+        return $this->dynamicTextAdTargetsService;
     }
 
     /**

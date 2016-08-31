@@ -1,11 +1,11 @@
 <?php
 
 
-namespace directapi\dynamictextadtargets\models;
+namespace directapi\services\dynamictextadtargets\models;
 
 
 use directapi\components\Model;
-use directapi\dynamictextadtargets\enum\WebpageStateSelectionEnum;
+use directapi\services\dynamictextadtargets\enum\WebpageStateSelectionEnum;
 
 class WebpagesSelectionCriteria extends Model
 {

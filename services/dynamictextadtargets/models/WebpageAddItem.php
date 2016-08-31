@@ -1,7 +1,7 @@
 <?php
 
 
-namespace directapi\dynamictextadtargets\models;
+namespace directapi\services\dynamictextadtargets\models;
 
 
 use directapi\common\enum\PriorityEnum;

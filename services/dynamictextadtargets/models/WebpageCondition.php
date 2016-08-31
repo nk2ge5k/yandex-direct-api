@@ -1,13 +1,13 @@
 <?php
 
 
-namespace directapi\dynamictextadtargets\models;
+namespace directapi\services\dynamictextadtargets\models;
 
 
 use directapi\components\constraints\ArrayOf;
 use directapi\components\Model;
-use directapi\dynamictextadtargets\enum\StringConditionOperatorEnum;
-use directapi\dynamictextadtargets\enum\WebpageConditionOperandEnum;
+use directapi\services\dynamictextadtargets\enum\StringConditionOperatorEnum;
+use directapi\services\dynamictextadtargets\enum\WebpageConditionOperandEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class WebpageCondition extends Model

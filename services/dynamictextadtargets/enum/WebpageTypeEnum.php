@@ -1,7 +1,7 @@
 <?php
 
 
-namespace directapi\dynamictextadtargets\enum;
+namespace directapi\services\dynamictextadtargets\enum;
 
 
 use directapi\components\Enum;

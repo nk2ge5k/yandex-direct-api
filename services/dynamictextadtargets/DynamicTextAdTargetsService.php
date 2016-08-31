@@ -1,25 +1,32 @@
 <?php
 
 
-namespace directapi\dynamictextadtargets;
+namespace directapi\services\dynamictextadtargets;
 
 
 use directapi\common\criterias\LimitOffset;
-use directapi\dynamictextadtargets\models\SetBidsItem;
-use directapi\dynamictextadtargets\models\WebpagesSelectionCriteria;
+use directapi\services\dynamictextadtargets\models\SetBidsItem;
+use directapi\services\dynamictextadtargets\models\WebpagesSelectionCriteria;
 use directapi\services\BaseService;
 
 class DynamicTextAdTargetsService extends  BaseService
 {
-    const SERVICE = 'DynamicTextAdTargets';
+    const SERVICE   = 'DynamicTextAdTargets';
+
+    const WEBPAGES  = 'Webpages';
 
     /**
      * @param array $webpages
      *
      * @return array
      */
-    public function add( array $webpages ) {
-
+    public function add( array $webpages )
+    {
+        return parent::doAdd(
+            [
+                self::WEBPAGES => $webpages
+            ]
+        );
     }
 
     /**
@@ -29,8 +36,20 @@ class DynamicTextAdTargetsService extends  BaseService
      *
      * @return array
      */
-    public function get( WebpagesSelectionCriteria $criteria, array $fieldNames, LimitOffset $page = null ) {
+    public function get( WebpagesSelectionCriteria $criteria, array $fieldNames, LimitOffset $page = null )
+    {
 
+        $page = $page === NULL ? LimitOffset::init(0, 10000) : $page;
+
+        return parent::doGet(
+            [
+                'SelectionCriteria' => $criteria,
+                'FieldNames' => $fieldNames,
+                'Page' => $page
+            ],
+            self::WEBPAGES,
+            NULL
+        );
     }
 
     /**
@@ -38,8 +57,12 @@ class DynamicTextAdTargetsService extends  BaseService
      *
      * @return array
      */
-    public function setBids( array $bids ) {
-
+    public function setBids( array $bids )
+    {
+        $params = [
+            'Bids' => $bids
+        ];
+        return $this->call('setBids', $params);
     }
 
     /**
