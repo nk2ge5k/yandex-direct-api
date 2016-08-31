@@ -30,6 +30,12 @@ class AdGroupAddItem extends Model
     public $RegionIds;
 
     /**
+     * @var string
+     * @Assert\Length(max="1024")
+     */
+    public $TrackingParams;
+
+    /**
      * @var \directapi\common\containers\ArrayOfString
      * @Assert\Valid()
      */

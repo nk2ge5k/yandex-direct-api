@@ -35,6 +35,12 @@ class AdGroupUpdateItem extends Model
     public $NegativeKeywords;
 
     /**
+     * @var string
+     * @Assert\Length(max="1024")
+     */
+    public $TrackingParams;
+
+    /**
      * @var MobileAppAdGroupUpdate
      * @Assert\Valid()
      */
