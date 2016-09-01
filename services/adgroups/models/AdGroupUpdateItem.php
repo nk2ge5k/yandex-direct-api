@@ -15,7 +15,6 @@ class AdGroupUpdateItem extends Model
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @Assert\Length(
      *      max = 255
      * )
@@ -24,7 +23,6 @@ class AdGroupUpdateItem extends Model
 
     /**
      * @var int[]
-     * @Assert\NotBlank()
      */
     public $RegionIds;
 
