@@ -36,7 +36,9 @@ class DirectApiService
 
     private $token;
     private $clientLogin;
-    private $apiUrl = 'https://api.direct.yandex.com/json/v5/';
+    private $apiUrl         = 'https://api.direct.yandex.com/json/v5/';
+    private $sandboxUrl     = 'https://api-sandbox.direct.yandex.com/json/v5/';
+    private $sandbox        = FALSE;
 
     public $units = 0;
     public $lastCallCost = 0;
@@ -136,6 +138,23 @@ class DirectApiService
             $this->clientLogin = $clientLogin;
         }
 
+    }
+
+    /**
+     * @param bool $sandbox
+     * @return $this
+     */
+    public function setSandbox ( bool $sandbox = TRUE ) {
+        $this->sandbox = $sandbox;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSandbox() {
+        return $this->sandbox;
     }
 
     /**
@@ -501,7 +520,7 @@ class DirectApiService
         curl_setopt_array(
             $curl,
             [
-                CURLOPT_URL => $this->apiUrl . $serviceName,
+                CURLOPT_URL => ( $this->sandbox ? $this->sandboxUrl : $this->apiUrl ). $serviceName,
                 CURLOPT_POSTFIELDS => $request
             ]
         );
