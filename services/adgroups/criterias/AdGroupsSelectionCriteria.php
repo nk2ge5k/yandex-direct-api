@@ -19,14 +19,21 @@ class AdGroupsSelectionCriteria extends Model implements ICallbackValidation
      * @var int[]
      */
     public $Ids;
-
+    /**
+     * @var int[]
+     */
+    public $TagIds;
+    /**
+     * @var string[]
+     */
+    public $Tags;
     /**
      * @var \directapi\services\adgroups\enum\AdGroupTypesEnum[]
      */
     public $Types;
 
     /**
-     * @var \directapi\services\ads\models\AdGroupStatusEnum[]
+     * @var \directapi\services\adgroups\enum\AdGroupStatusEnum[]
      */
     public $Statuses;
 
