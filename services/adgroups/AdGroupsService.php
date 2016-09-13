@@ -8,6 +8,7 @@ use directapi\common\results\ActionResult;
 use directapi\services\adgroups\criterias\AdGroupsSelectionCriteria;
 use directapi\services\adgroups\enum\AdGroupFieldEnum;
 use directapi\services\adgroups\enum\DynamicTextAdGroupFieldEnum;
+use directapi\services\adgroups\enum\DynamicTextFeedAdGroupFieldEnum;
 use directapi\services\adgroups\enum\MobileAppAdGroupFieldEnum;
 use directapi\services\adgroups\models\AdGroupAddItem;
 use directapi\services\adgroups\models\AdGroupGetItem;
@@ -41,11 +42,12 @@ class AdGroupsService extends BaseService
     }
 
     /**
-     * @param AdGroupsSelectionCriteria     $SelectionCriteria
-     * @param AdGroupFieldEnum[]            $FieldNames
-     * @param MobileAppAdGroupFieldEnum[]   $MobileAppAdGroupFieldNames
-     * @param DynamicTextAdGroupFieldEnum[] $DynamicTextAdGroupFieldNames
-     * @param LimitOffset|null              $Page
+     * @param AdGroupsSelectionCriteria                 $SelectionCriteria
+     * @param AdGroupFieldEnum[]                        $FieldNames
+     * @param MobileAppAdGroupFieldEnum[]               $MobileAppAdGroupFieldNames
+     * @param DynamicTextAdGroupFieldEnum[]             $DynamicTextAdGroupFieldNames
+     * @param DynamicTextFeedAdGroupFieldEnum[]         $DynamicTextFeedAdGroupFieldNames
+     * @param LimitOffset|null                          $Page
      *
      * @return AdGroupGetItem[]
      */
@@ -54,6 +56,7 @@ class AdGroupsService extends BaseService
         array $FieldNames,
         array $MobileAppAdGroupFieldNames = [],
         array $DynamicTextAdGroupFieldNames = [],
+        array $DynamicTextFeedAdGroupFieldNames = [],
         LimitOffset $Page = null
     ) {
         $params = [
@@ -65,6 +68,9 @@ class AdGroupsService extends BaseService
         }
         if ($DynamicTextAdGroupFieldNames) {
             $params['DynamicTextAdGroupFieldNames'] = $DynamicTextAdGroupFieldNames;
+        }
+        if ( $DynamicTextFeedAdGroupFieldNames ) {
+            $params['DynamicTextFeedAdGroupFieldNames'] = $DynamicTextFeedAdGroupFieldNames;
         }
 
         if ($Page) {
