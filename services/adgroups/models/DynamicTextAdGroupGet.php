@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: d.kuznetsov
- * Date: 25.05.2016
- * Time: 18:57
- */
 
 namespace directapi\services\adgroups\models;
 
