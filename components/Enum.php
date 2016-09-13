@@ -12,8 +12,17 @@ abstract class Enum implements JsonSerializable
     private $current_val;
 
     public static $prefix;
+    /**
+     * @var array $cache
+     */
+    protected static $cache = [];
 
-    final public function __construct($type)
+    /**
+     * Enum constructor.
+     * @param $type
+     * @throws EnumException
+     */
+    public function __construct($type)
     {
         $class_name = get_class($this);
 
@@ -29,18 +38,34 @@ abstract class Enum implements JsonSerializable
         $this->current_val = constant("{$class_name}::{$type}");
     }
 
-    final public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString()
     {
         return $this->current_val;
     }
 
-    final public static function getValues()
+    /**
+     * @return array
+     */
+    public static function getValues()
     {
-        $class = new ReflectionClass(get_called_class());
-        return array_values($class->getConstants());
+        $class_name = static::class;
+
+        if ( !isset(self::$cache[$class_name]) ) {
+            $class = new ReflectionClass($class_name);
+            self::$cache[$class_name] = array_values($class->getConstants());
+        }
+
+        return self::$cache[$class_name];
     }
 
-    final public static function check(array $arr)
+    /**
+     * @param array $arr
+     * @return bool
+     */
+    public static function check(array $arr)
     {
         $values = static::getValues();
         foreach ($arr as $value) {
@@ -51,6 +76,9 @@ abstract class Enum implements JsonSerializable
         return true;
     }
 
+    /**
+     * @return mixed
+     */
     public function jsonSerialize()
     {
         return $this->current_val;
