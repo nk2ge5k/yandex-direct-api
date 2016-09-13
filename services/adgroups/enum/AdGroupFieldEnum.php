@@ -14,5 +14,6 @@ class AdGroupFieldEnum extends Enum
     const RegionIds = 'RegionIds';
     const NegativeKeywords = 'NegativeKeywords';
     const Type = 'Type';
+    const SubType = 'Subtype';
     const TrackingParams = 'TrackingParams';
 }
