@@ -12,7 +12,6 @@ class DynamicTextAdUpdate extends Model
 {
     /**
      * @var string
-     * @Assert\NotBlank()
      * @Assert\Length(max="75")
      */
     public $Text;

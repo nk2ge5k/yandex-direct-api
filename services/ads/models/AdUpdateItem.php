@@ -29,7 +29,7 @@ class AdUpdateItem extends Model implements ICallbackValidation
 
     /**
      * @Assert\Valid()
-     * @var DynamicTextAdAdd|null
+     * @var DynamicTextAdUpdate|null
      */
     public $DynamicTextAd;
 
