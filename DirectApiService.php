@@ -116,7 +116,7 @@ class DirectApiService
     /**
      * @var bool
      */
-    protected $useOperatorPoints = FALSE;
+    protected $useOperatorPoints = NULL;
 
     /**
      * DirectApiService constructor.
@@ -144,7 +144,11 @@ class DirectApiService
      * @param bool $sandbox
      * @return $this
      */
-    public function setSandbox ( bool $sandbox = TRUE ) {
+    public function setSandbox ( $sandbox = TRUE ) {
+        if ( !is_bool($sandbox) ) {
+            throw new \InvalidArgumentException('Argument must be type of bool, ' . gettype($sandbox) . ' given');
+        }
+
         $this->sandbox = $sandbox;
 
         return $this;
@@ -161,7 +165,11 @@ class DirectApiService
      * @param bool $use
      * @return $this
      */
-    public function useOperatorPoints( bool $use ) {
+    public function useOperatorPoints( $use ) {
+        if ( !is_bool($use) ) {
+            throw new \InvalidArgumentException('Argument must be type of bool, ' . gettype($use) . ' given');
+        }
+
         $this->useOperatorPoints = $use;
 
         return $this;
@@ -171,7 +179,7 @@ class DirectApiService
      * @return bool
      */
     public function isUsingOperatorPoints() {
-        return $this->useOperatorPoints;
+        return (bool) $this->useOperatorPoints;
     }
 
     /**
@@ -464,18 +472,18 @@ class DirectApiService
             );
         }
 
-        // Fixme
-        curl_setopt(
-            $this->ch,
-            CURLOPT_HTTPHEADER,
-            [
-                'Content-Type: application/json; charset=utf-8',
-                'Authorization: Bearer ' . $this->token,
-                'Client-Login: ' . $this->clientLogin,
-                'Accept-Language: ru',
-                'Use-Operator-Units: ' . (($this->useOperatorPoints) ? 'true' : 'false')
-            ]
-        );
+        $http_headers = [
+            'Content-Type: application/json; charset=utf-8',
+            'Authorization: Bearer ' . $this->token,
+            'Client-Login: ' . $this->clientLogin,
+            'Accept-Language: ru'
+        ];
+
+        if ( !!$this->useOperatorPoints ) {
+            $http_headers[] = 'Use-Operator-Units: ' . (($this->useOperatorPoints === TRUE) ? 'true' : 'false');
+        }
+
+        curl_setopt($this->ch, CURLOPT_HTTPHEADER, $http_headers);
 
 
         return $this->ch;
