@@ -11,7 +11,7 @@ use directapi\services\keywords\enum\KeywordFieldEnum;
 use directapi\services\keywords\models\KeywordAddItem;
 use directapi\services\keywords\models\KeywordGetItem;
 use directapi\services\keywords\models\KeywordUpdateItem;
-use \directapi\services\keywords\cirterias\KeywordsSelectionCriteria;
+use \directapi\services\keywords\criterias\KeywordsSelectionCriteria;
 
 class KeywordsService extends BaseService
 {

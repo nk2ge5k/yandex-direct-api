@@ -1,6 +1,6 @@
 <?php
 
-namespace directapi\services\keywords\cirterias;
+namespace directapi\services\keywords\criterias;
 
 
 use directapi\components\constraints as DirectApiAssert;
