@@ -13,7 +13,7 @@ use directapi\common\results\ActionResult;
 
 class AudienceTargetsService extends BaseService {
 
-    const SERVICE = 'AudiencetTargets';
+    const SERVICE = 'AudienceTargets';
 
     /**
      * @param AudienceTargetSelectionCriteria   $selectionCriteria
