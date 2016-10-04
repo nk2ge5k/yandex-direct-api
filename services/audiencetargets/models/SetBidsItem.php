@@ -6,7 +6,7 @@ use directapi\components\interfaces\ICallbackValidation;
 use directapi\components\Model;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-
+use directapi\components\constraints AS DirectApiAssert;
 
 class SetBidsItem extends Model implements ICallbackValidation {
 
