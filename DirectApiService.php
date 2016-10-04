@@ -19,6 +19,8 @@ use directapi\services\dictionaries\DictionariesService;
 use directapi\services\keywords\KeywordsService;
 use directapi\services\sitelinks\SitelinksService;
 use directapi\services\vcards\VCardsService;
+use directapi\services\retargetinglists\RetargetingListsService;
+use directapi\services\audiencetargets\AudienceTargetsService;
 use directapi\services\dynamictextadtargets\DynamicTextAdTargetsService;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -109,6 +111,14 @@ class DirectApiService
      * @var DynamicTextAdTargetsService
      */
     private $dynamicTextAdTargetsService;
+    /**
+     * @var RetargetingListsService
+     */
+    private $retargetingListsService;
+    /**
+     * @var AudienceTargetsService
+     */
+    private $audienceTargetsService;
     /**
      * @var CacheInterface
      */
@@ -373,6 +383,26 @@ class DirectApiService
             $this->dynamicTextAdTargetsService = new DynamicTextAdTargetsService($this);
         }
         return $this->dynamicTextAdTargetsService;
+    }
+
+    /**
+     * @return RetargetingListsService
+     */
+    public function getRetargetingListsService() {
+        if ( !$this->retargetingListsService ) {
+            $this->retargetingListsService = new RetargetingListsService($this);
+        }
+        return $this->retargetingListsService;
+    }
+
+    /**
+     * @return AudienceTargetsService
+     */
+    public function getAudienceTargetsService() {
+        if ( !$this->audienceTargetsService ) {
+            $this->audienceTargetsService = new AudienceTargetsService($this);
+        }
+        return $this->audienceTargetsService;
     }
 
     /**
