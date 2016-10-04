@@ -3,7 +3,7 @@
 namespace directapi\services\audiencetargets;
 
 use directapi\services\BaseService;
-use directapi\services\audiencetargets\enums\AudienceTargetFieldEnum;
+use directapi\services\audiencetargets\enum\AudienceTargetFieldEnum;
 use directapi\services\audiencetargets\criterias\AudienceTargetSelectionCriteria;
 use directapi\services\audiencetargets\models\AudienceTargetAddItem;
 use directapi\services\audiencetargets\models\SetBidsItem;
@@ -85,6 +85,9 @@ class AudienceTargetsService extends BaseService {
         return parent::suspend($selectionCriteria);
     }
     
+    /**
+     * @inheritdoc
+     */ 
     protected function getName() {
         return strtolower(self::SERVICE);
     }

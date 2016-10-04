@@ -4,6 +4,7 @@ namespace directapi\services\audiencetargets\criterias;
 
 use directapi\components\interfaces\ICallbackValidation;
 use directapi\components\Model;
+use directapi\services\audiencetargets\enum;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 

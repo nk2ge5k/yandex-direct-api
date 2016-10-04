@@ -1,6 +1,6 @@
 <?php
 
-namespace directapi\services\audiencetargets\enums;
+namespace directapi\services\audiencetargets\enum;
 
 use directapi\components\Enum; 
 
