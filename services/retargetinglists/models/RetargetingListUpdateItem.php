@@ -29,7 +29,6 @@ class RetargetingListUpdateItem extends Model {
      */
     public $Description;
     /**
-     * @DirectApiAssert\ArrayOf(type="\directapi\services\reatrgetinglists\models\RetargetingListRuleItem")
      * @Assert\Count(max=50)
      *
      * @var RetargetingListRuleItem[]

@@ -23,7 +23,6 @@ class RetargetingListAddItem extends Model {
      */
     public $Description;
     /**
-     * @DirectApiAssert\ArrayOf(type="\directapi\services\reatrgetinglists\models\RetargetingListRuleItem")
      * @Assert\Count(min=1, max=50)
      * @Assert\NotBlank()
      *
