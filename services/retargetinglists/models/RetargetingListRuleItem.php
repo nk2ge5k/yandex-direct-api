@@ -20,7 +20,6 @@ class RetargetingListRuleItem extends Model {
     public $Arguments;
     /**
      * @Assert\NotBlank()
-     * @DirectApiAssert\IsEnum(type="\directapi\services\retargetinglists\enum\RetargetingListRuleOperatorEnum")
      *
      * @var RetargetingListRuleOperatorEnum
      */
