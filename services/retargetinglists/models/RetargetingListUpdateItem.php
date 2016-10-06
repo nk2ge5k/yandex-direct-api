@@ -2,7 +2,7 @@
 
 namespace directapi\services\retargetinglists\models;
 
-use directapi\components\Modle;
+use directapi\components\Model;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use directapi\components\constraints AS DirectApiAssert;
