@@ -8,7 +8,7 @@ use directapi\common\criterias\LimitOffset;
 use directapi\services\dynamictextadtargets\models\SetBidsItem;
 use directapi\services\dynamictextadtargets\models\WebpagesSelectionCriteria;
 use directapi\services\BaseService;
-use directapi\services\common\criterias\IdsCriteria;
+use directapi\common\criterias\IdsCriteria;
 
 class DynamicTextAdTargetsService extends  BaseService
 {
@@ -58,8 +58,8 @@ class DynamicTextAdTargetsService extends  BaseService
      * 
      * @return array
      */
-    public function delete( IdsCriteria $SelectionCriteria ) {
-        return parent::delete($SelectionCriteria);
+    public function delete( IdsCriteria $criteria ) {
+        return parent::delete($criteria);
     }
 
     /**
