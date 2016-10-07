@@ -14,14 +14,12 @@ class WebpageCondition extends Model
     /**
      * @var \directapi\services\dynamictextadtargets\enum\StringConditionOperatorEnum
      *
-     * @IsEnum(type="directapi\services\dynamictextadtargets\enum\StringConditionOperatorEnum")
      * @Assert\NotBlank()
      */
     public $Operand;
     /**
      * @var \directapi\services\dynamictextadtargets\enum\WebpageConditionOperandEnum
      *
-     * @IsEnum(type="directapi\services\dynamictextadtargets\enum\WebpageConditionOperandEnum")
      * @Assert\NotBlank()
      */
     public $Operator;
