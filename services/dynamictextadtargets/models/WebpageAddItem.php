@@ -27,7 +27,6 @@ class WebpageAddItem extends Model
      * @var WebpageCondition[]
      *
      * @Assert\Valid()
-     * @ArrayOf(type="WebpageCondition")
      * @Assert\Count(max="10", maxMessage="Не более 10 элементов в массиве Conditions")
      */
     public $Conditions;
