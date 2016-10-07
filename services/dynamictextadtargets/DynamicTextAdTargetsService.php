@@ -58,8 +58,8 @@ class DynamicTextAdTargetsService extends  BaseService
      * 
      * @return array
      */
-    public function delete( IdsCriteria $criteria ) {
-        return parent::delete($criteria);
+    public function delete( IdsCriteria $SelectionCriteria ) {
+        return parent::delete($SelectionCriteria);
     }
 
     /**
