@@ -1,5 +1,7 @@
 # yandex-direct-api
 
+[Offical yandex direct API documentation](https://tech.yandex.ru/direct/doc/dg/concepts/about-docpage/?ncrnd=6456)
+
 ## Installation
 
 ```
