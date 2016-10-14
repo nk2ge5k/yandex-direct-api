@@ -16,14 +16,14 @@ class ChangesService extends BaseService
      *
      * @return CheckDictionariesResponse
      */
-    public function checkDictionaries($Timestamp)
+    public function checkDictionaries( string $Timestamp = NULL )
     {
-        $params = [
-            'Timestamp' => $Timestamp
-        ];
-        $result = $this->call('checkDictionaries', $params);
-        return $result;
-        //return $this->map($result, CheckDictionariesResponse::class);
+        return $this->call(
+            'checkDictionaries', 
+            $Timestamp !== NULL
+                ? [ 'Timestamp' => $Timestamp ]
+                : []
+        );
     }
 
     /**
@@ -31,14 +31,14 @@ class ChangesService extends BaseService
      *
      * @return CheckCampaignsResponse
      */
-    public function checkCampaigns($Timestamp)
+    public function checkCampaigns( string $Timestamp )
     {
-        $params = [
-            'Timestamp' => $Timestamp
-        ];
-        $result = $this->call('checkCampaigns', $params);
-        return $result;
-        //return $this->map($result, CheckCampaignsResponse::class);
+        return $this->call(
+            'checkCampaigns',
+            [
+                'Timestamp' = $Timestamp
+            ] 
+        );
     }
 
     /**
@@ -51,30 +51,35 @@ class ChangesService extends BaseService
      * @throws \Exception
      */
     public function check(
-        array $CampaignIds = [],
-        array  $AdGroupIds = [],
-        array  $AdIds = [],
-        array  $FieldNames,
-        $Timestamp
+        array $CampaignIds  = [],
+        array $AdGroupIds   = [],
+        array $AdIds        = [],
+        array $FieldNames,
+        string $Timestamp
     ) {
         $params = [
+            'Timestamp'     => $Timestamp,
+            'FieldNames'    => $FieldNames
         ];
+        
         if ($CampaignIds) {
-            $params['CampaignIds'] = $CampaignIds;
+            $params['CampaignIds']  = $CampaignIds;
         } elseif ($AdGroupIds) {
-            $params['AdGroupIds'] = $AdGroupIds;
+            $params['AdGroupIds']   = $AdGroupIds;
         } elseif ($AdIds) {
-            $params['AdIds'] = $AdIds;
+            $params['AdIds']        = $AdIds;
         } else {
-            throw new \Exception('Должен быть указан один из параметров - CampaignIds, AdGroupIds, AdIds');
+            throw new \InvalidArgumentException(
+                'Должен быть указан один из параметров - CampaignIds, AdGroupIds, AdIds'
+            );
         }
-        $params['FieldNames'] = $FieldNames;
-        $params['Timestamp'] = $Timestamp;
-        $result = $this->call('check', $params);
-        return $result;
-        //return $this->map($result, CheckResponse::class);
+        
+        return $this->call('check', $params);
     }
-
+    
+    /**
+     * @return string
+     */
     protected function getName()
     {
         return 'changes';
