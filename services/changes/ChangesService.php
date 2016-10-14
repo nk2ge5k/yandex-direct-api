@@ -20,9 +20,7 @@ class ChangesService extends BaseService
     {
         return $this->call(
             'checkDictionaries', 
-            $Timestamp !== NULL
-                ? [ 'Timestamp' => $Timestamp ]
-                : []
+            [ 'Timestamp' => $Timestamp ]
         );
     }
 
