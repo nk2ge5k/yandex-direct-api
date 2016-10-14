@@ -36,7 +36,7 @@ class ChangesService extends BaseService
         return $this->call(
             'checkCampaigns',
             [
-                'Timestamp' = $Timestamp
+                'Timestamp' => $Timestamp
             ] 
         );
     }
