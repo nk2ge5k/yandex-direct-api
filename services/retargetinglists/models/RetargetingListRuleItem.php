@@ -13,9 +13,8 @@ class RetargetingListRuleItem extends Model {
     /**
      * @Assert\Count(min=1, max=250)
      * @Assert\NotBlank()
-     * @DirectApiAssert\ArrayOf(type="\directapi\services\retargetinglists\models\RetargetingListRuleArgumentItem")
      *
-     * @var RetargetingListRuleArgumentItem[]
+     * @var \directapi\services\retargetinglists\models\RetargetingListRuleArgumentItem[]
      */
     public $Arguments;
     /**

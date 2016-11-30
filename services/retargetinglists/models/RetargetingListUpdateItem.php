@@ -5,13 +5,11 @@ namespace directapi\services\retargetinglists\models;
 use directapi\components\Model;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use directapi\components\constraints AS DirectApiAssert;
-
 
 class RetargetingListUpdateItem extends Model {
     
     /**
-     * @Assert\NotBlanck()
+     * @Assert\NotBlank()
      * 
      * @var int
      */
@@ -31,7 +29,7 @@ class RetargetingListUpdateItem extends Model {
     /**
      * @Assert\Count(max=50)
      *
-     * @var RetargetingListRuleItem[]
+     * @var \directapi\services\retargetinglists\models\RetargetingListRuleItem[]
      */
     public $Rules;
 }
