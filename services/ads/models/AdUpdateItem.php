@@ -35,13 +35,13 @@ class AdUpdateItem extends Model implements ICallbackValidation
 
     /**
      * @Assert\Valid()
-     * @var TextAdUpdate
+     * @var TextImageAdUpdate|null
      */
     public $TextImageAd;
 
     /**
      * @Assert\Valid()
-     * @var MobileAppImageAdUpdate
+     * @var MobileAppImageAdUpdate|null
      */
     public $MobileAppImageAd;
 
@@ -65,7 +65,7 @@ class AdUpdateItem extends Model implements ICallbackValidation
                 ->atPath('MobileAppAd')
                 ->atPath('DynamicTextAd')
                 ->atPath('TextImageAd')
-                ->atPath('$MobileAppImageAd')
+                ->atPath('MobileAppImageAd')
                 ->addViolation();
         }
     }
