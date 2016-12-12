@@ -35,13 +35,13 @@ class AdUpdateItem extends Model implements ICallbackValidation
 
     /**
      * @Assert\Valid()
-     * @var TextAdAdd
+     * @var TextAdUpdate
      */
     public $TextImageAd;
 
     /**
      * @Assert\Valid()
-     * @var MobileAppImageAdAdd
+     * @var MobileAppImageAdUpdate
      */
     public $MobileAppImageAd;
 
