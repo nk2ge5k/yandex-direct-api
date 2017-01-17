@@ -35,7 +35,7 @@ class AdAddItem extends Model implements ICallbackValidation
 
     /**
      * @Assert\Valid()
-     * @var TextAdAdd
+     * @var TextImageAdAdd
      */
     public $TextImageAd;
 
