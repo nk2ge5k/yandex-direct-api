@@ -20,4 +20,5 @@ class KeywordFieldEnum extends Enum
     const Productivity = 'Productivity';
     const StatisticsSearch = 'StatisticsSearch';
     const StatisticsNetwork = 'StatisticsNetwork';
+    const ServingStatus = 'ServingStatus';
 }
