@@ -16,4 +16,5 @@ class AdGroupFieldEnum extends Enum
     const Type = 'Type';
     const SubType = 'Subtype';
     const TrackingParams = 'TrackingParams';
+    const ServingStatus = 'ServingStatus';
 }
