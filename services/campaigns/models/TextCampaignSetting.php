@@ -10,14 +10,12 @@ class TextCampaignSetting
     /**
      * @var \directapi\services\campaigns\enum\TextCampaignSettingsEnum
      * @Assert\NotBlank()
-     * @DirectApiAssert\IsEnum(type="directapi\services\campaigns\enum\TextCampaignSettingsEnum")
      */
     public $Option;
 
     /**
      * @var \directapi\common\enum\YesNoEnum
      * @Assert\NotBlank()
-     * @DirectApiAssert\IsEnum(type="directapi\common\enum\YesNoEnum")
      */
     public $Value;
 
