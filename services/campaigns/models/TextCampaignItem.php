@@ -11,7 +11,6 @@ class TextCampaignItem extends Model
     /**
      * @var TextCampaignSetting[]
      * @Assert\Valid()
-     * @DirectApiAssert\ArrayOf(type="directapi\services\campaigns\models\TextCampaignSetting")
      */
     public $Settings;
 
