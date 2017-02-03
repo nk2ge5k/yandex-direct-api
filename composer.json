@@ -20,7 +20,7 @@
     "symfony/validator": "~2.2|~3.0",
     "doctrine/annotations": "^1.2.7",
     "doctrine/cache": "1.*",
-    "netresearch/jsonmapper": "~0.10.0"
+    "netresearch/jsonmapper": "^1.1"
   },
   "autoload": {
     "psr-4": {
