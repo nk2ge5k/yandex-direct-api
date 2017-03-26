@@ -10,6 +10,7 @@ use directapi\services\adextensions\AdExtensionsService;
 use directapi\services\adgroups\AdGroupsService;
 use directapi\services\adimages\AdImagesService;
 use directapi\services\ads\AdsService;
+use directapi\services\agencyclients\AgencyClientsService;
 use directapi\services\bidmodifiers\BidModifiersService;
 use directapi\services\bids\BidsService;
 use directapi\services\campaigns\CampaignsService;
@@ -55,6 +56,11 @@ class DirectApiService
      * @var AdsService
      */
     private $adsService;
+
+    /**
+     * @var AgencyClientsService
+     */
+    private $agencyClients;
 
     /**
      * @var BidModifiersService
@@ -250,6 +256,17 @@ class DirectApiService
             $this->adsService = new AdsService($this);
         }
         return $this->adsService;
+    }
+
+    /**
+     * @return AgencyClientsService
+     */
+    public function getAgencyClientsService()
+    {
+        if (!$this->agencyClients) {
+            $this->agencyClients = new AgencyClientsService($this);
+        }
+        return $this->agencyClients;
     }
 
     /**
