@@ -11,6 +11,7 @@ class ClientFieldEnum extends Enum
     const Login = 'Login';
     const ClientId = 'ClientId';
     const ClientInfo = 'ClientInfo';
+    const CountryId = 'CountryId';
     const Phone = 'Phone';
     const CreatedAt = 'CreatedAt';
     const VatRate = 'VatRate';
@@ -22,5 +23,6 @@ class ClientFieldEnum extends Enum
     const Settings = 'Settings';
     const Restrictions = 'Restrictions';
     const Grants = 'Grants';
+    const Type = 'Type';
     const Representatives = 'Representatives';
 }
