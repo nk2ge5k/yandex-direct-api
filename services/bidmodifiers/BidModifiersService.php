@@ -106,8 +106,7 @@ class BidModifiersService extends BaseService
             'BidModifierToggleItems' => $BidModifierToggleItems
         ];
         $result = $this->call('toggle', $params);
-        return $result->SetResults;
-        //return $this->mapArray($result->SetResults, ToggleResult::class);
+        return $result->ToggleResults;
     }
 
     protected function getName()
